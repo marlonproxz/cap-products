@@ -28,7 +28,7 @@ entity Supplier {
         Fax        : String;
 };
 
-entity Category {
+entity Categories {
     key ID   : String(1);
         Name : String;
 };
@@ -66,6 +66,7 @@ entity ProductReview {
 }
 
 entity SalesData {
-    key DeliveryDate : DateTime;
+    key ID           : UUID;
+        DeliveryDate : DateTime;
         Revenue      : Decimal(16, 2);
 }
