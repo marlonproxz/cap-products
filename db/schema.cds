@@ -10,25 +10,26 @@ type Address {
     Country    : String(3);
 };
 
-type EmailAddresses_01 : array of { // o many   asi se declara una tabla interna o un array
-    kind  : String;
-    email : String;
-};
+// type EmailAddresses_01 : array of { // o many   asi se declara una tabla interna o un array
+//     kind  : String;
+//     email : String;
+// };
 
-type EmailAddresses_02 {
-    kind  : String;
-    email : String;
-};
+// type EmailAddresses_02 {
+//     kind  : String;
+//     email : String;
+// };
 
-entity Emails {
-    email_01 :      EmailAddresses_01;
-    email_02 : many EmailAddresses_02;
-    email_03 : many {
-        kind  : String;
-        email : String;
-    }
-};
+// entity Emails {
+//     email_01 :      EmailAddresses_01;
+//     email_02 : many EmailAddresses_02;
+//     email_03 : many {
+//         kind  : String;
+//         email : String;
+//     }
+// };
 
+type Dec : Decimal(16, 2);
 entity Products {
     key ID               : UUID;
         Name             : String;
@@ -36,8 +37,8 @@ entity Products {
         ImageUrl         : String;
         ReleaseDate      : DateTime;
         DiscontinuedDate : DateTime;
-        Price            : Decimal(16, 2);
-        Height           : Decimal(16, 2);
+        Price            : Dec;
+        Height           : type of Price;//Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
@@ -46,7 +47,7 @@ entity Products {
 
 entity Suppliers {
     key ID      : UUID;
-        Name    : String;
+        Name    : Products:Name;//type of Products:Name;//String;
         Address : Address;
         Email   : String;
         Phone   : String;
