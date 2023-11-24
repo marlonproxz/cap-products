@@ -1,6 +1,6 @@
 namespace com.logali;
 
-define type Name : String(50);
+define type Name       : String(50);
 
 type Address {
     Street     : String;
@@ -8,6 +8,25 @@ type Address {
     State      : String;
     PostalCode : String(5);
     Country    : String(3);
+};
+
+type EmailAddresses_01 : array of { // o many   asi se declara una tabla interna o un array
+    kind  : String;
+    email : String;
+};
+
+type EmailAddresses_02 {
+    kind  : String;
+    email : String;
+};
+
+entity Emails {
+    email_01 :      EmailAddresses_01;
+    email_02 : many EmailAddresses_02;
+    email_03 : many {
+        kind  : String;
+        email : String;
+    }
 };
 
 entity Products {
