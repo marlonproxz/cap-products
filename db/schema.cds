@@ -1,5 +1,7 @@
 namespace com.logali;
 
+define type Name : String(50);
+
 entity Products {
     key ID               : UUID;
         Name             : String;
