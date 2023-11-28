@@ -49,13 +49,13 @@ type Address {
 //     }
 // };
 
-entity Car {
-    key ID : UUID;
-    name : String;
-    virtual dicount_1 : Decimal;
-    @Core.Computed: false
-    virtual dicount_2 : Decimal;
-};
+// entity Car {
+//     key ID : UUID;
+//     name : String;
+//     virtual dicount_1 : Decimal;
+//     @Core.Computed: false
+//     virtual dicount_2 : Decimal;
+// };
 
 type Dec         : Decimal(16, 2);
 
@@ -155,10 +155,39 @@ entity ProductReview {
     key Name    : String;
         Rating  : Integer;
         Comment : String;
-}
+};
 
 entity SalesData {
     key ID           : UUID;
         DeliveryDate : DateTime;
         Revenue      : Decimal(16, 2);
-}
+};
+
+entity SelProducts  as select from Products;
+
+entity SelProducts1 as
+    select from Products {
+        *
+    };
+
+entity SelProducts2 as
+    select from Products {
+        Name,
+        Price,
+        Quantity
+    };
+
+entity SelProducts3 as
+    select from Products
+    left join ProductReview
+        on Products.Name = ProductReview.Name
+    {
+        Rating,
+        Products.Name,
+        sum(Price) as TotalPrice
+    }
+    group by
+        Rating,
+        Products.Name
+    order by
+        Rating;
